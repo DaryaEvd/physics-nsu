@@ -35,6 +35,16 @@ std::vector<double> findSolutions(const int amountOfNumbers,
   return intersections;
 }
 
+void printOutput(std::vector<double> intersections) {
+  for (int i = 0; i < intersections.size(); i++) {
+    std::cout << "#" << i + 1 << ": " << std::fixed
+              << std::setprecision(7) << intersections[i]
+              << std::endl;
+  }
+  std::cout << "========================================"
+            << std::endl;
+}
+
 int main(int argc, char **argv) {
   // argv[1] = a - width of hole
   if (argc != 2) {
@@ -74,23 +84,13 @@ int main(int argc, char **argv) {
       findSolutions(amountOfNumbers, epsilon, E, tg, rightPart);
 
   std::cout << "Intersection for symmetric function: " << std::endl;
-  for (int i = 0; i < intersectionsRightTg.size(); i++) {
-    std::cout << "#" << i + 1 << ": " << std::fixed
-              << std::setprecision(7) << intersectionsRightTg[i]
-              << std::endl;
-  }
+  printOutput(intersectionsRightTg);
 
   std::vector<double> intersectionsRightCtg =
       findSolutions(amountOfNumbers, epsilon, E, ctg, rightPart);
 
-  std::cout << "========================================"
-            << std::endl;
   std::cout << "Intersection for assymmetric function: " << std::endl;
-  for (int i = 0; i < intersectionsRightCtg.size(); i++) {
-    std::cout << "#" << i + 1 << ": " << std::fixed
-              << std::setprecision(7) << intersectionsRightCtg[i]
-              << std::endl;
-  }
+  printOutput(intersectionsRightCtg);
 
   std::cout << "===== intersections found ======" << std::endl;
 
