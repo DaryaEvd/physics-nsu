@@ -4,9 +4,8 @@
 #include <cmath>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <vector>
-
-using namespace std;
 
 namespace plt = matplotlibcpp;
 
@@ -45,6 +44,17 @@ void printOutput(std::vector<double> intersections) {
             << std::endl;
 }
 
+void drawWithNormScale(std::vector<double> &line) {
+  const int maxScaleOnYAxis = 10;
+  std::vector<double>::iterator it;
+  for (it = line.begin(); it != line.end(); ++it) {
+    if (abs(*it) > maxScaleOnYAxis) {
+      line.erase(it);
+      line.insert(it, std::numeric_limits<double>::quiet_NaN());
+    }
+  }
+}
+
 int main(int argc, char **argv) {
   // argv[1] = a - width of hole
   if (argc != 2) {
@@ -62,14 +72,14 @@ int main(int argc, char **argv) {
   const int h = 1;
   const int U_0 = 1;
 
-  const int amountOfNumbers = 100000;
+  const int amountOfNumbers = 250000;
   std::vector<double> E = generatePoints(0, -1, amountOfNumbers);
 
-  vector<double> tg(amountOfNumbers);
-  vector<double> ctg(amountOfNumbers);
-  vector<double> rightPart(amountOfNumbers);
+  std::vector<double> tg(amountOfNumbers);
+  std::vector<double> ctg(amountOfNumbers);
+  std::vector<double> rightPart(amountOfNumbers);
 
-  vector<double> xAxis(amountOfNumbers, 0);
+  std::vector<double> xAxis(amountOfNumbers, 0);
 
   for (int i = 0; i < amountOfNumbers; i++) {
     rightPart[i] = 1 / std::sqrt((U_0 / std::abs(E[i]) - 1));
@@ -83,16 +93,20 @@ int main(int argc, char **argv) {
   std::vector<double> intersectionsRightTg =
       findSolutions(amountOfNumbers, epsilon, E, tg, rightPart);
 
-  std::cout << "Intersection for symmetric function: " << std::endl;
+  std::cout << "Intersections for symmetric function: " << std::endl;
   printOutput(intersectionsRightTg);
 
   std::vector<double> intersectionsRightCtg =
       findSolutions(amountOfNumbers, epsilon, E, ctg, rightPart);
 
-  std::cout << "Intersection for assymmetric function: " << std::endl;
+  std::cout << "Intersections for assymmetric function: " << std::endl;
   printOutput(intersectionsRightCtg);
 
   std::cout << "===== intersections found ======" << std::endl;
+
+  drawWithNormScale(rightPart);
+  drawWithNormScale(tg);
+  drawWithNormScale(ctg);
 
   plt::plot(E, rightPart);
   plt::plot(E, tg);
