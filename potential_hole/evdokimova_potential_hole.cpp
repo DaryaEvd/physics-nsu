@@ -85,7 +85,7 @@ int main(int argc, char **argv) {
     rightPart[i] = 1 / std::sqrt((U_0 / std::abs(E[i]) - 1));
     tg[i] = std::tan((std::sqrt(2 * m * (E[i] + U_0)) * a / (2 * h)));
     double tan = tg[i];
-    ctg[i] = -1 / tan;
+    ctg[i] = 1 / tan;
   }
 
   const double epsilon = 0.0001;
