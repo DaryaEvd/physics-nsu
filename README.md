@@ -17,6 +17,6 @@ Huge scale:
 ![plot](https://github.com/DaryaEvd/physics/blob/main/potential_hole/Figure_2.png)  
   
 OK scale:  
-![plot](https://github.com/DaryaEvd/physics/blob/main/potential_hole/Figure_3.png)  
+![plot](https://github.com/DaryaEvd/physics/blob/main/potential_hole/Figure_4.png)  
 
 
