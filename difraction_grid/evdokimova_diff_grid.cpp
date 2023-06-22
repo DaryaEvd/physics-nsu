@@ -15,32 +15,37 @@ std::vector<double> generatePoints(double start, double end,
   return pointsArray;
 }
 
-double countSinc(double x) { return std::sin(x) / x; }
+double countSinc(double xPoints) {
+  return std::sin(xPoints) / xPoints;
+}
 
 double countLeftMult(double lengthOfWave, double thetta, double a) {
   return countSinc(M_PI * a / lengthOfWave * std::sin(thetta));
 }
 
 double countRightMult(double lengthOfWave, double thetta, double d,
-                      int N) {
-  double numerator =
-      std::sin(N * M_PI * d / lengthOfWave * std::sin(thetta));
-  double denominator =
-      std::sin(M_PI * d / lengthOfWave * std::sin(thetta));
+                      const int N) {
+  double commonCoefficient =
+      M_PI * d * std::sin(thetta) / lengthOfWave;
+
+  double numerator = std::sin(N * commonCoefficient);
+  double denominator = std::sin(commonCoefficient);
 
   return numerator / denominator;
 }
 
-double countIntensity(int nGaps, double lengthOfWave, double thetta,
-                      double a, double d, double I_0) {
+double countIntensity(const int nGaps, double lengthOfWave,
+                      double thetta, double a, double d, double I_0) {
 
-  double leftMult = countLeftMult(lengthOfWave, thetta, d); //левый множитель в формуле
-  double squareLeftMult = leftMult * leftMult;
+  double leftPart = countLeftMult(lengthOfWave, thetta,
+                                  a); // левый множитель в формуле
+  double squareLeft = leftPart * leftPart;
 
-  double rightMult = countRightMult(lengthOfWave, thetta, d, nGaps); //правый множитель в формуле
-  double squareRightMult = rightMult * rightMult;
+  double rightPart = countRightMult(
+      lengthOfWave, thetta, d, nGaps); // правый множитель в формуле
+  double squareRight = rightPart * rightPart;
 
-  return I_0 * squareLeftMult * squareRightMult;
+  return I_0 * squareLeft * squareRight;
 }
 
 void drawIntensity() {
@@ -51,40 +56,40 @@ void drawIntensity() {
   double lengthRedLight = 400;
   double lengthPurpleLight = 700;
 
-  int m = 1; // порядок максимума 
+  int m = 3; // порядок максимума
 
-  double a = 0.001;
-  int d = 1000;
+  const int a = 1500;
+  const int d = 4000;
 
-  double thetta = m * lengthPurpleLight / d;
+  double thetta = (m * lengthRedLight / d);
   // std::cout << "thetta = " << thetta << std::endl;
 
   int amountOfPoints = 50000;
   // координаты по Ox на графике
   // строим массив точек, от которых будем считать
-  std::vector<double> xPoints = generatePoints( 
-      -thetta, thetta,
-      amountOfPoints); 
 
-  // for (int i = 0; i < 10; i++) {
-  //   std::cout << x.at(i)
-  //             << " "; // посмотреть координаты (ну у первых 10 хотя б)
-  // }
-  // std::cout << std::endl;
+  std::vector<double> xPoints =
+      generatePoints(-thetta, thetta, amountOfPoints);
 
-  std::vector<double> redLight, purpleLight; //координаты по Oy на графике
+  std::vector<double> redLight;
+  std::vector<double> purpleLight;
 
-  for (double xCoord: xPoints) {
+  for (double xCoord : xPoints) {
     redLight.push_back(
         countIntensity(nGaps, lengthRedLight, xCoord, a, d, I_0));
     purpleLight.push_back(
         countIntensity(nGaps, lengthPurpleLight, xCoord, a, d, I_0));
   }
 
+  std::vector<double> xSinArray;
+  for (double xCoord : xPoints) {
+    xSinArray.push_back(std::sin(xCoord));
+  }
+
   plt::title("Intensity");
-  plt::plot(xPoints, redLight, "red");
-  plt::plot(xPoints, purpleLight, "purple");
- 
+
+  plt::plot(xSinArray, redLight, "red");
+  plt::plot(xSinArray, purpleLight, "purple");
   plt::show();
 }
 
