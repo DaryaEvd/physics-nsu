@@ -38,7 +38,7 @@ add_executable(diffraction_grid src/evdokimova_diff_grid.cpp)
 
 # link python and numpy
 target_link_libraries(
-    diffraction_grid 
+    diffraction_grid
     PRIVATE
         ${PYTHON_LIBRARIES}
         Python3::NumPy
