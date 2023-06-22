@@ -11,6 +11,7 @@ Result:
 Task: [potential hole](https://github.com/DaryaEvd/physics/tree/main/potential_hole).  
 To compile and run:  
 g++ evdokimova_potential_hole.cpp -o hole -I /usr/include/python3.8/ -I include/ -lpython3.8  
-./hole  
+./hole [width of hole]  
+
 
 
