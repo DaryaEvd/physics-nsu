@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <iomanip>
 #include <iostream>
 #include <vector>
 
@@ -18,6 +19,20 @@ std::vector<double> generatePoints(double start, double end,
   }
 
   return pointsArray;
+}
+
+std::vector<double> findSolutions(const int amountOfNumbers,
+                                  const double epsilon,
+                                  std::vector<double> points,
+                                  std::vector<double> left,
+                                  std::vector<double> right) {
+  std::vector<double> intersections;
+  for (int i = 0; i < amountOfNumbers; i++) {
+    if (std::abs(right[i] - left[i]) < epsilon) {
+      intersections.push_back(points[i]);
+    }
+  }
+  return intersections;
 }
 
 int main(int argc, char **argv) {
@@ -55,35 +70,29 @@ int main(int argc, char **argv) {
 
   const double epsilon = 0.0001;
 
-  std::vector<double> intersectionsRightTg;
-  for (int i = 0; i < amountOfNumbers; i++) {
-    if (std::abs(rightPart[i] - tg[i]) < epsilon) {
-      intersectionsRightTg.push_back(E[i]);
-    }
-  }
+  std::vector<double> intersectionsRightTg =
+      findSolutions(amountOfNumbers, epsilon, E, tg, rightPart);
 
   std::cout << "Intersection for symmetric function: " << std::endl;
   for (int i = 0; i < intersectionsRightTg.size(); i++) {
-    std::cout << "#" << i + 1 << ": " << intersectionsRightTg[i]
+    std::cout << "#" << i + 1 << ": " << std::fixed
+              << std::setprecision(7) << intersectionsRightTg[i]
               << std::endl;
   }
 
-  std::vector<double> intersectionsRightCtg;
-  for (int i = 0; i < amountOfNumbers; i++) {
-    if (std::abs(rightPart[i] - ctg[i]) < epsilon) {
-      intersectionsRightCtg.push_back(E[i]);
-    }
-  }
+  std::vector<double> intersectionsRightCtg =
+      findSolutions(amountOfNumbers, epsilon, E, ctg, rightPart);
 
   std::cout << "========================================"
             << std::endl;
   std::cout << "Intersection for assymmetric function: " << std::endl;
   for (int i = 0; i < intersectionsRightCtg.size(); i++) {
-    std::cout << "#" << i + 1 << ": " << intersectionsRightCtg[i]
+    std::cout << "#" << i + 1 << ": " << std::fixed
+              << std::setprecision(7) << intersectionsRightCtg[i]
               << std::endl;
   }
 
-  std::cout << "intersections found" << std::endl;
+  std::cout << "===== intersections found ======" << std::endl;
 
   plt::plot(E, rightPart);
   plt::plot(E, tg);
@@ -94,4 +103,3 @@ int main(int argc, char **argv) {
 
   return 0;
 }
-
