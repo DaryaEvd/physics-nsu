@@ -5,6 +5,12 @@ Task: [diffraction grid](https://github.com/DaryaEvd/physics/tree/main/difractio
 To compile and run:  
 g++ evdokimova_diff_grid.cpp -o grid -I /usr/include/python3.8/ -I include/ -lpython3.8  
 ./grid   
+or  
+use cmake:   
+from 'build' folder write:  
+cmake ..  
+make  
+
 Result:  
 ![plot](https://github.com/DaryaEvd/physics/blob/main/difraction_grid/Figure_1_diff_grid.png)  
   
