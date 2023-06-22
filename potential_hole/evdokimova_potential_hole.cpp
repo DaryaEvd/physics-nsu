@@ -55,6 +55,31 @@ void drawWithNormScale(std::vector<double> &line) {
   }
 }
 
+void createHole(const int U, const int a, const int amountOfNumbers) {
+  std::vector<double> verticalWall =
+      generatePoints(-U, 0, amountOfNumbers);
+  std::vector<double> leftVertic(amountOfNumbers, 0);
+  std::vector<double> rightVertic(amountOfNumbers, a);
+
+  std::vector<double> cornerLeftX =
+      generatePoints(0, -a, amountOfNumbers);
+  std::vector<double> cornerLeftY(cornerLeftX.size(), 0);
+
+  std::vector<double> bottomX = generatePoints(0, a, amountOfNumbers);
+  std::vector<double> bottomY(bottomX.size(), -U);
+
+  std::vector<double> cornerRightX =
+      generatePoints(a, 2 * a, amountOfNumbers);
+  std::vector<double> cornerRightY(cornerRightX.size(), 0);
+
+  plt::plot(cornerLeftX, cornerLeftY, "blue");
+  plt::plot(leftVertic, verticalWall, "blue");
+  plt::plot(bottomX, bottomY, "blue");
+  plt::plot(rightVertic, verticalWall, "blue");
+  plt::plot(cornerRightX, cornerRightY, "blue");
+
+}
+
 int main(int argc, char **argv) {
   // argv[1] = a - width of hole
   if (argc != 2) {
@@ -93,26 +118,17 @@ int main(int argc, char **argv) {
   std::vector<double> intersectionsRightTg =
       findSolutions(amountOfNumbers, epsilon, E, tg, rightPart);
 
-  std::cout << "Intersections for symmetric function: " << std::endl;
-  printOutput(intersectionsRightTg);
-
   std::vector<double> intersectionsRightCtg =
       findSolutions(amountOfNumbers, epsilon, E, ctg, rightPart);
 
-  std::cout << "Intersections for assymmetric function: " << std::endl;
-  printOutput(intersectionsRightCtg);
+  createHole(U_0, a, amountOfNumbers);
 
-  std::cout << "===== intersections found ======" << std::endl;
+  std::vector<double> levelsTan = generatePoints(0, a, amountOfNumbers);
+  for(double solution : intersectionsRightTg) {
+    std::vector<double> numbers(levelsTan.size(), solution);
+    plt::plot(levelsTan, numbers);
+  }
 
-  drawWithNormScale(rightPart);
-  drawWithNormScale(tg);
-  drawWithNormScale(ctg);
-
-  plt::plot(E, rightPart);
-  plt::plot(E, tg);
-  plt::plot(E, ctg);
-
-  plt::plot(E, xAxis);
   plt::show();
 
   return 0;
