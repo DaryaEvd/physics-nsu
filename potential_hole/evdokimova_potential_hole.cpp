@@ -53,6 +53,38 @@ int main(int argc, char **argv) {
     ctg[i] = -1 / tan;
   }
 
+  const double epsilon = 0.0001;
+
+  std::vector<double> intersectionsRightTg;
+  for (int i = 0; i < amountOfNumbers; i++) {
+    if (std::abs(rightPart[i] - tg[i]) < epsilon) {
+      intersectionsRightTg.push_back(E[i]);
+    }
+  }
+
+  std::cout << "Intersection for symmetric function: " << std::endl;
+  for (int i = 0; i < intersectionsRightTg.size(); i++) {
+    std::cout << "#" << i + 1 << ": " << intersectionsRightTg[i]
+              << std::endl;
+  }
+
+  std::vector<double> intersectionsRightCtg;
+  for (int i = 0; i < amountOfNumbers; i++) {
+    if (std::abs(rightPart[i] - ctg[i]) < epsilon) {
+      intersectionsRightCtg.push_back(E[i]);
+    }
+  }
+
+  std::cout << "========================================"
+            << std::endl;
+  std::cout << "Intersection for assymmetric function: " << std::endl;
+  for (int i = 0; i < intersectionsRightCtg.size(); i++) {
+    std::cout << "#" << i + 1 << ": " << intersectionsRightCtg[i]
+              << std::endl;
+  }
+
+  std::cout << "intersections found" << std::endl;
+
   plt::plot(E, rightPart);
   plt::plot(E, tg);
   plt::plot(E, ctg);
@@ -62,3 +94,4 @@ int main(int argc, char **argv) {
 
   return 0;
 }
+
