@@ -18,8 +18,8 @@ make
 ./[evdokimova_project_name]  
 ```  
 
-Result:  
-![plot](https://github.com/DaryaEvd/physics/blob/main/difraction_grid/Figure_1_diff_grid.png)  
+#### Result:  
+![viewOfGrid](https://github.com/DaryaEvd/physics/blob/main/difraction_grid/pictures/Diffraction_grid.png  )  
   
 ## Task: [POTENTIAL HOLE](https://github.com/DaryaEvd/physics/tree/main/potential_hole).  
 
@@ -35,12 +35,18 @@ or
 ./[waves]  
 ```  
 
-Result:  
-Solutions:  
-![plot](https://github.com/DaryaEvd/physics/blob/main/potential_hole/Figure_4.png)  
+#### Result:  
+##### Solutions:  
+![solutions](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Solutions.png)  
+
   
-Levels:  
-![plot](https://github.com/DaryaEvd/physics/blob/main/potential_hole/Figure_5_levels.png)    
+##### Levels:  
+![symmetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Symmetric_levels.png)  
+![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymmetric_levels.png)  
+
+##### Waves:
+![symmetric]()  
+![assymetric]()
 
 
 
