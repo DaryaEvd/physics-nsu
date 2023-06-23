@@ -1,13 +1,13 @@
 # physics
-##Tasks to code 
+
+## Tasks to code 
 
 ### To compile and run from console:  
 Go to ==src== folder and write:  
-'''
+```
 g++ [evdokimova_project.cpp] -o [project] -I /usr/include/python3.8/ -I include/ -lpython3.8  
 ./project  
-'''  
-
+```
 
 ##Task: [diffraction grid](https://github.com/DaryaEvd/physics/tree/main/difraction_grid).  
 To compile and run:  
