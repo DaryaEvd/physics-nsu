@@ -20,7 +20,7 @@ std::vector<double> generatePoints(double start, double end,
   return pointsArray;
 }
 
-std::vector<double> findSolutions(const int amountOfNumbers,
+std::vector<double> countEquation(const int amountOfNumbers,
                                   const double epsilon,
                                   std::vector<double> points,
                                   std::vector<double> left,
@@ -79,6 +79,17 @@ void createHole(const int U, const int a, const int amountOfNumbers) {
   plt::plot(cornerRightX, cornerRightY, "blue");
 }
 
+double waveFunction(double x, double A, double B, double k1,
+                    double k2, double solution, double a) {
+  if (x < 0) {
+    return A * exp(k1 * x) + solution;
+  } else if (x <= a) {
+    return B * cos(k2 * x) + solution;
+  } else {
+    return A * exp(-k1 * x) + solution;
+  }
+}
+
 int main(int argc, char **argv) {
   // argv[1] = a - width of hole
   if (argc != 2) {
@@ -116,57 +127,40 @@ int main(int argc, char **argv) {
   const double epsilon = 0.0001;
 
   std::vector<double> intersectionsRightTg =
-      findSolutions(amountOfNumbers, epsilon, E, tg, rightPart);
+      countEquation(amountOfNumbers, epsilon, E, tg, rightPart);
 
   std::vector<double> intersectionsRightCtg =
-      findSolutions(amountOfNumbers, epsilon, E, ctg, rightPart);
+      countEquation(amountOfNumbers, epsilon, E, ctg, rightPart);
 
   createHole(U_0, a, amountOfNumbers);
 
   // uncomment this to see Symmetric function's levels
   // /*
-  // std::vector<double> levelsTan =
-  //     generatePoints(0, a, amountOfNumbers);
-  // for (double solution : intersectionsRightTg) {
-  //   std::vector<double> numbers(levelsTan.size(), solution);
-  //   plt::plot(levelsTan, numbers);
-  // }
+  std::vector<double> levelsTan =
+      generatePoints(0, a, amountOfNumbers);
+  for (double solution : intersectionsRightTg) {
+    std::vector<double> numbers(levelsTan.size(), solution);
+    plt::plot(levelsTan, numbers);
+  }
 
   for (double solution : intersectionsRightTg) {
-    double k2 = sqrt(2 * m * (solution + U_0)) / h; // inside hole
-    double k1 = sqrt(2 * m * abs(solution)) / h;    // outside hole
 
-    // count coefficients:
-    // double B =
-    //     sqrt(exp(k1 * a) * exp(k1 * a) + (k1 / k2) * (k1 / k2)) /
-    //     cos(k2 * a);
+    double k2 = sqrt(2 * m * (solution + U_0)) / h; // inside
+    double k1 = sqrt(2 * m * abs(solution)) / h;    // outside
 
-    // double C =
-    //     B * exp(k2 * a / 2) / sqrt(1 + (k1 / k2) * exp(-2 * k1 *
-    //     a));
-    
-    double B = (k1 / ((pow(cos(k2 * a / 2), 2)) +
-                      k1 * (sin(k2 * a) / (2 * k2) + a / 2)));
-    B = sqrt(B);
-    double C = B * cos(k2 * a / 2) * exp(k1 * a / 2);
+    double B =
+        sqrt((k1 / ((cos(k2 * a / 2) * cos(k2 * a / 2)) +
+                    k1 * (sin(k2 * a) + 1 / (2 * k2) + a / 2))));
+    double A = B * cos(k2 * a / 2) * exp(k1 * a / 2);
 
-    auto func = [&](double x) -> double {
-      if (x <= 0) {
-        return C * exp(k1 * x) + solution;
-      } else if (0 < x && x < a) {
-        return B * cos(k2 * x) + solution;
-      } else if (x >= a) {
-        return C * exp(-k1 * x) + solution;
-      }
-    };
+    std::vector<double> x = generatePoints(0, a, 10000);
+    std::vector<double> wave_func(x.size());
 
-    std::vector<double> points = generatePoints(-a, a, 10000);
-    std::vector<double> wavesFunc(points.size(), solution);
+    for (size_t i = 0; i < x.size(); i++) {
+      wave_func[i] = waveFunction(x[i], A, B, k1, k2, solution, a);
+    }
 
-    std::transform(points.begin(), points.end(), wavesFunc.begin(),
-                   func);
-
-    plt::plot(points, wavesFunc);
+    plt::plot(x, wave_func);
   }
 
   // uncomment this to see Assymmetric function's levels
