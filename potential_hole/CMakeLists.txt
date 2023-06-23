@@ -52,9 +52,22 @@ target_link_libraries(
 add_executable(levels 
   src/evdokimova_levels.cpp)
 
-  # link python and numpy
+# link python and numpy
 target_link_libraries(
   levels
+
+  PRIVATE
+      ${PYTHON_LIBRARIES}
+      Python3::NumPy
+)
+
+
+add_executable(waves 
+  src/evdokimova_waves.cpp)
+
+# link python and numpy
+target_link_libraries(
+  waves
 
   PRIVATE
       ${PYTHON_LIBRARIES}
