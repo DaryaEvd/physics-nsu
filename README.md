@@ -28,11 +28,11 @@ Go to `build` folder write:
 ``` 
 cmake ..  
 make
-./[solutions]  
+./[solutions] [width of hole]  
 or
-./[levels]  
+./[levels] [width of hole]  
 or  
-./[waves]  
+./[waves] [width of hole]    
 ```  
 
 #### Result:  

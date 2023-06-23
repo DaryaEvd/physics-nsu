@@ -1,17 +1,10 @@
 #include "matplotlibcpp.h"
 
 #include "calculations.hpp"
-#include "coefficient.hpp"
+#include "coefficients.hpp"
 #include "consoleOutput.hpp"
 #include "drawingFigures.hpp"
 #include "drawingWaves.hpp"
-
-#include <algorithm>
-#include <cmath>
-#include <iomanip>
-#include <iostream>
-#include <limits>
-#include <vector>
 
 namespace plt = matplotlibcpp;
 
@@ -54,30 +47,32 @@ int main(int argc, char **argv) {
 
   createHole(U_0, a, amountOfNumbers);
 
-  // uncomment this to see Symmetric function's levels
+  // uncomment a section below to see Symmetric function's levels and
+  // waves
   // /*
-  // std::vector<double> levelsTan =
-  //     generatePoints(0, a, amountOfNumbers);
-  // for (double solution : intersectionsRightTg) {
-  //   std::vector<double> numbers(levelsTan.size(), solution);
-  //   plt::plot(levelsTan, numbers);
-  // }
+  std::vector<double> levelsTan =
+      generatePoints(0, a, amountOfNumbers);
+  for (double solution : intersectionsRightTg) {
+    std::vector<double> numbers(levelsTan.size(), solution);
+    plt::plot(levelsTan, numbers);
+  }
+  // waves
+  drawSymmetricWaveFunction(intersectionsRightTg, h, m, U_0, a);
+  // */
 
-  // drawSymmetricWaveFunction(intersectionsRightTg, h, m, U_0, a);
-
-  // uncomment this to see Assymmetric function's levels
-  // /*
+  // uncomment a section below to see Assymmetric function's levels
+  /*
   std::vector<double> levelsCotan =
       generatePoints(0, a, amountOfNumbers);
   for (double solution : intersectionsRightCtg) {
     std::vector<double> numbers(levelsCotan.size(), solution);
-    plt::plot(levelsCotan, numbers);
+    plt::plot(levelsCotan, numbers, "gray");
     plt::title("Assymetric wave functions");
   }
-
+  // waves
   drawAssymmetricWaveFunction(intersectionsRightCtg, h, m, U_0, a);
 
-  // */
+  */
 
   plt::show();
   plt::close();

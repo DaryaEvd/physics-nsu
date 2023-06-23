@@ -3,7 +3,7 @@
 #include "drawingWaves.hpp"
 
 #include "calculations.hpp"
-#include "coefficient.hpp"
+#include "coefficients.hpp"
 
 #include <cmath> 
 namespace plt = matplotlibcpp;

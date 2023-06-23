@@ -4,13 +4,6 @@
 #include "consoleOutput.hpp"
 #include "drawingFigures.hpp"
 
-#include <algorithm>
-#include <cmath>
-#include <iomanip>
-#include <iostream>
-#include <limits>
-#include <vector>
-
 namespace plt = matplotlibcpp;
 
 int main(int argc, char **argv) {
@@ -40,12 +33,7 @@ int main(int argc, char **argv) {
 
   std::vector<double> xAxis(amountOfNumbers, 0);
 
-  for (int i = 0; i < amountOfNumbers; i++) {
-    rightPart[i] = 1 / std::sqrt((U_0 / std::abs(E[i]) - 1));
-    tg[i] = std::tan((std::sqrt(2 * m * (E[i] + U_0)) * a / (2 * h)));
-    double tan = tg[i];
-    ctg[i] = 1 / tan;
-  }
+  countParts(amountOfNumbers, rightPart, tg, ctg, E, h, m, U_0, a);
 
   const double epsilon = 0.0001;
 
