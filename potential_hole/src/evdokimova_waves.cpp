@@ -4,6 +4,7 @@
 #include "coefficients.hpp"
 #include "consoleOutput.hpp"
 #include "drawingFigures.hpp"
+#include "drawingLevels.hpp"
 #include "drawingWaves.hpp"
 
 namespace plt = matplotlibcpp;
@@ -52,26 +53,18 @@ int main(int argc, char **argv) {
   // /*
   std::vector<double> levelsTan =
       generatePoints(0, a, amountOfNumbers);
-  for (double solution : intersectionsRightTg) {
-    std::vector<double> numbers(levelsTan.size(), solution);
-    plt::plot(levelsTan, numbers);
-  }
-  // waves
+  drawLevels(levelsTan, intersectionsRightTg);
   drawSymmetricWaveFunction(intersectionsRightTg, h, m, U_0, a);
+  plt::title("Symmetric wave functions");
   // */
 
   // uncomment a section below to see Assymmetric function's levels
   /*
   std::vector<double> levelsCotan =
       generatePoints(0, a, amountOfNumbers);
-  for (double solution : intersectionsRightCtg) {
-    std::vector<double> numbers(levelsCotan.size(), solution);
-    plt::plot(levelsCotan, numbers, "gray");
-    plt::title("Assymetric wave functions");
-  }
-  // waves
+  drawLevels(levelsCotan, intersectionsRightCtg);
   drawAssymmetricWaveFunction(intersectionsRightCtg, h, m, U_0, a);
-
+  plt::title("Assymmetric wave functions");
   */
 
   plt::show();

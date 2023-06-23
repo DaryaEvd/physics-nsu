@@ -56,7 +56,10 @@ add_executable(levels
   src/evdokimova_levels.cpp
   src/drawingFigures.cpp
   src/calculations.cpp
-  src/consoleOutput.cpp)
+  src/consoleOutput.cpp
+  src/coefficient.cpp
+  src/drawingLevels.cpp
+  src/drawingWaves.cpp)
 
 # link python and numpy
 target_link_libraries(
@@ -73,7 +76,8 @@ add_executable(waves
   src/calculations.cpp
   src/consoleOutput.cpp
   src/coefficient.cpp
-  src/drawingWaves.cpp)
+  src/drawingWaves.cpp  
+  src/drawingLevels.cpp)
 
 # link python and numpy
 target_link_libraries(
@@ -83,4 +87,3 @@ target_link_libraries(
       ${PYTHON_LIBRARIES}
       Python3::NumPy
 )
-

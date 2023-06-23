@@ -1,7 +1,9 @@
 #include "matplotlibcpp.h"
 
 #include "calculations.hpp"
+#include "coefficients.hpp"
 #include "drawingFigures.hpp"
+#include "drawingLevels.hpp"
 
 namespace plt = matplotlibcpp;
 
@@ -45,25 +47,20 @@ int main(int argc, char **argv) {
   createHole(U_0, a, amountOfNumbers);
 
   // uncomment a section to see Symmetric function's levels
-  // /*
+  /*
   std::vector<double> levelsTan =
       generatePoints(0, a, amountOfNumbers);
-  for (double solution : intersectionsRightTg) {
-    std::vector<double> numbers(levelsTan.size(), solution);
-    plt::plot(levelsTan, numbers);
-  }
+    drawLevels(levelsTan, intersectionsRightTg);
   plt::title("Symmetric function's levels");
-  // */
+  */
 
   // uncomment a section below to see Assymmetric function's levels
-  /*
-  std::vector<double> levelsCotan = generatePoints(0, a,
-  amountOfNumbers); for(double solution : intersectionsRightCtg) {
-    std::vector<double> numbers(levelsCotan.size(), solution);
-    plt::plot(levelsCotan, numbers);
-  }
+  // /*
+  std::vector<double> levelsCotan =
+      generatePoints(0, a, amountOfNumbers);
+  drawLevels(levelsCotan, intersectionsRightCtg);
   plt::title("Assymetric function'l levels");
-  */
+  // */
 
   plt::show();
   plt::close();
