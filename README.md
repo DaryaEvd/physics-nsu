@@ -20,7 +20,7 @@ To compile and run:
 g++ evdokimova_solutions.cpp -o solutions -I /usr/include/python3.8/ -I include/ -lpython3.8  
 ./solutions [width of hole]  
 g++ evdokimova_levels.cpp -o levels -I /usr/include/python3.8/ -I include/ -lpython3.8   
-./solutions [width of hole]   
+./levels [width of hole]   
    
 or use cmake:  
 cmake ..  
@@ -30,6 +30,11 @@ or
 ./levels [width of hole]  
 
 Result:  
+Solutions:  
 ![plot](https://github.com/DaryaEvd/physics/blob/main/potential_hole/Figure_4.png)  
+  
+Levels:  
+![plot](https://github.com/DaryaEvd/physics/blob/main/potential_hole/Figure_5_levels.png)    
+
 
 
