@@ -79,12 +79,23 @@ void createHole(const int U, const int a, const int amountOfNumbers) {
   plt::plot(cornerRightX, cornerRightY, "blue");
 }
 
-double waveFunction(double x, double C, double B, double k1,
+double symmetricFunctionEquations(double x, double C, double B, double k1,
                     double k2, double solution, double a) {
   if (x < 0) {
     return C * exp(k1 * x) + solution;
   } else if (x <= a) {
     return B * cos(k2 * x) + solution;
+  } else {
+    return C * exp(-k1 * x) + solution;
+  }
+}
+
+double assymmetricFunctionEquations(double x, double C, double B, double k1,
+                    double k2, double solution, double a) {
+  if (x < 0) {
+    return C * exp(k1 * x) + solution;
+  } else if (x <= a) {
+    return B * sin(k2 * x) + solution;
   } else {
     return C * exp(-k1 * x) + solution;
   }
@@ -103,8 +114,9 @@ void countParts(const int amountOfNumbers,
   }
 }
 
-void drawWaveFunction(std::vector<double> intersections, const int h,
-                      const int m, const int U_0, const int a) {
+void drawSymmetricWaveFunction(std::vector<double> intersections,
+                               const int h, const int m,
+                               const int U_0, const int a) {
   for (double solution : intersections) {
     double k2 = sqrt(2 * m * (solution + U_0)) / h; // inside
     double k1 = sqrt(2 * m * abs(solution)) / h;    // outside
@@ -119,7 +131,31 @@ void drawWaveFunction(std::vector<double> intersections, const int h,
 
     for (size_t i = 0; i < x.size(); i++) {
       waveFuncArray[i] =
-          waveFunction(x[i], C, B, k1, k2, solution, a);
+          symmetricFunctionEquations(x[i], C, B, k1, k2, solution, a);
+    }
+
+    plt::plot(x, waveFuncArray);
+  }
+}
+
+void drawAssymmetricWaveFunction(std::vector<double> intersections,
+                                 const int h, const int m,
+                                 const int U_0, const int a) {
+  for (double solution : intersections) {
+    double k2 = sqrt(2 * m * (solution + U_0)) / h; // inside
+    double k1 = sqrt(2 * m * abs(solution)) / h;    // outside
+
+    double B =
+        sqrt((k1 / ((sin(k2 * a / 2) * sin(k2 * a / 2)) +
+                    k1 * (-sin(k2 * a) + 1 / (2 * k2) + a / 2))));
+    double C = B * sin(k2 * a / 2) * exp(k1 * a / 2);
+
+    std::vector<double> x = generatePoints(0, a, 10000);
+    std::vector<double> waveFuncArray(x.size());
+
+    for (size_t i = 0; i < x.size(); i++) {
+      waveFuncArray[i] =
+          assymmetricFunctionEquations(x[i], C, B, k1, k2, solution, a);
     }
 
     plt::plot(x, waveFuncArray);
@@ -167,24 +203,28 @@ int main(int argc, char **argv) {
 
   // uncomment this to see Symmetric function's levels
   // /*
-  std::vector<double> levelsTan =
-      generatePoints(0, a, amountOfNumbers);
-  for (double solution : intersectionsRightTg) {
-    std::vector<double> numbers(levelsTan.size(), solution);
-    plt::plot(levelsTan, numbers);
-  }
+  // std::vector<double> levelsTan =
+  //     generatePoints(0, a, amountOfNumbers);
+  // for (double solution : intersectionsRightTg) {
+  //   std::vector<double> numbers(levelsTan.size(), solution);
+  //   plt::plot(levelsTan, numbers);
+  // }
 
-  drawWaveFunction(intersectionsRightTg, h, m, U_0, a);
- 
+  // drawSymmetricWaveFunction(intersectionsRightTg, h, m, U_0, a);
+
   // uncomment this to see Assymmetric function's levels
-  /*
-  std::vector<double> levelsCotan = generatePoints(0, a,
-  amountOfNumbers); for(double solution : intersectionsRightCtg) {
+  // /*
+  std::vector<double> levelsCotan =
+      generatePoints(0, a, amountOfNumbers);
+  for (double solution : intersectionsRightCtg) {
     std::vector<double> numbers(levelsCotan.size(), solution);
     plt::plot(levelsCotan, numbers);
     plt::title("Assymetric wave functions");
   }
-  */
+
+  drawAssymmetricWaveFunction(intersectionsRightCtg, h, m, U_0, a);
+
+  // */
 
   plt::show();
   plt::close();
