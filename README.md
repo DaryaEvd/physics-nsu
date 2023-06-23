@@ -24,7 +24,7 @@ make
 ## Task: [POTENTIAL HOLE](https://github.com/DaryaEvd/physics/tree/main/potential_hole)   
 
 ### To compile and run use Cmake:  
-Go to `build` folder write: 
+Go to `build` folder and write from there: 
 ``` 
 cmake ..  
 make

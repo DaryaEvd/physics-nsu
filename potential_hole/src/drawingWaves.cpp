@@ -50,4 +50,5 @@ void drawAssymmetricWaveFunction(std::vector<double> intersections,
 
     plt::plot(x, waveFuncArray);
   }
+
 }

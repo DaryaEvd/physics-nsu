@@ -44,23 +44,26 @@ int main(int argc, char **argv) {
   std::vector<double> intersectionsRightCtg =
       countEquation(amountOfNumbers, epsilon, E, ctg, rightPart);
 
+  plt::plot(
+      {0}); // DON'T DELETE THIS LINE! OTHERWISE YOU GOT SEG FAULT
+
   createHole(U_0, a, amountOfNumbers);
 
   // uncomment a section to see Symmetric function's levels
-  /*
+  // /*
   std::vector<double> levelsTan =
       generatePoints(0, a, amountOfNumbers);
     drawLevels(levelsTan, intersectionsRightTg);
   plt::title("Symmetric function's levels");
-  */
+  // */
 
   // uncomment a section below to see Assymmetric function's levels
-  // /*
+  /*
   std::vector<double> levelsCotan =
       generatePoints(0, a, amountOfNumbers);
   drawLevels(levelsCotan, intersectionsRightCtg);
   plt::title("Assymetric function'l levels");
-  // */
+  */
 
   plt::show();
   plt::close();
