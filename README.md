@@ -52,7 +52,7 @@ or
 
 ###### For width 20
 ![symmetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Symetric_waves_20.png) 
-![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymetric_waves_10.png)  
+![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymetric_waves_20.png)  
 
 ### Some recommendations about using matplotlibcpp  
 1. There **always** should be at least one `plt::plot(...)` method in `main`.  
