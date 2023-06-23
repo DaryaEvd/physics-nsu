@@ -45,9 +45,14 @@ or
 ![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymmetric_levels.png)  
 
 ##### Waves:
-![symmetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Symetric_waves.png) 
+###### For width 10
+![symmetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Symetric_waves_10.png) 
  
-![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymetric_waves.png)  
+![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymetric_waves_10.png)  
+
+###### For width 20
+![symmetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Symetric_waves_20.png) 
+![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymetric_waves_10.png)  
 
 ### Some recommendations about using matplotlibcpp  
 1. There **always** should be at least one `plt::plot(...)` method in `main`.  
