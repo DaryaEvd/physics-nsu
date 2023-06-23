@@ -21,7 +21,7 @@ make
 #### Result:  
 ![viewOfGrid](https://github.com/DaryaEvd/physics/blob/main/difraction_grid/pictures/Diffraction_grid.png  )  
   
-## Task: [POTENTIAL HOLE](https://github.com/DaryaEvd/physics/tree/main/potential_hole).  
+## Task: [POTENTIAL HOLE](https://github.com/DaryaEvd/physics/tree/main/potential_hole)   
 
 ### To compile and run use Cmake:  
 Go to `build` folder write: 
