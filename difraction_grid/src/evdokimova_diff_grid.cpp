@@ -59,7 +59,7 @@ void drawIntensity() {
   int m = 3; // порядок максимума
 
   const int a = 1500;
-  const int d = 4000;
+  const int d = 4500;
 
   double thetta = (m * lengthRedLight / d);
   // std::cout << "thetta = " << thetta << std::endl;
@@ -86,14 +86,17 @@ void drawIntensity() {
     xSinArray.push_back(std::sin(xCoord));
   }
 
-  plt::title("Intensity");
+  // plt::title("Intensity"); //with title будет мемлик((
 
   plt::plot(xSinArray, redLight, "red");
   plt::plot(xSinArray, purpleLight, "purple");
   plt::show();
+
+  plt::close();
 }
 
 int main() {
   drawIntensity();
+
   return 0;
 }

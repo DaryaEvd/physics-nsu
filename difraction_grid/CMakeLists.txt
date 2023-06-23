@@ -27,6 +27,9 @@ if(NOT matplotlib_POPULATED)
     FetchContent_Populate(matplotlib)
 endif()
 
+SET(WARN_FLAGS "-Wall -Wpedantic -Wextra")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARN_FLAGS} ${ASAN_OPTIONS}") 
+
 include_directories(
     ${PYTHON_INCLUDE_DIRS}
     ${PYTHON_NUMPY_INCLUDE_DIR}
