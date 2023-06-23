@@ -10,6 +10,7 @@ use cmake:
 from 'build' folder write:  
 cmake ..  
 make  
+./diffraction_grid  
 
 Result:  
 ![plot](https://github.com/DaryaEvd/physics/blob/main/difraction_grid/Figure_1_diff_grid.png)  
@@ -19,8 +20,6 @@ To compile and run:
 g++ evdokimova_potential_hole.cpp -o hole -I /usr/include/python3.8/ -I include/ -lpython3.8  
 ./hole [width of hole]  
 Result:
-  
-OK scale:  
 ![plot](https://github.com/DaryaEvd/physics/blob/main/potential_hole/Figure_4.png)  
 
 
