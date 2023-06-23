@@ -1,5 +1,9 @@
 #include "matplotlibcpp.h"
 
+#include "calculations.hpp"
+#include "consoleOutput.hpp"
+#include "drawingFigures.hpp"
+
 #include <algorithm>
 #include <cmath>
 #include <iomanip>
@@ -8,52 +12,6 @@
 #include <vector>
 
 namespace plt = matplotlibcpp;
-
-std::vector<double> generatePoints(double start, double end,
-                                   int amountOfNumbers) {
-  std::vector<double> pointsArray(amountOfNumbers);
-  double step = (end - start) / amountOfNumbers;
-  for (int i = 0; i < amountOfNumbers; i++) {
-    pointsArray[i] = start + i * step;
-  }
-
-  return pointsArray;
-}
-
-std::vector<double> findSolutions(const int amountOfNumbers,
-                                  const double epsilon,
-                                  std::vector<double> points,
-                                  std::vector<double> left,
-                                  std::vector<double> right) {
-  std::vector<double> intersections;
-  for (int i = 0; i < amountOfNumbers; i++) {
-    if (std::abs(right[i] - left[i]) < epsilon) {
-      intersections.push_back(points[i]);
-    }
-  }
-  return intersections;
-}
-
-void printOutput(std::vector<double> intersections) {
-  for (int i = 0; i < intersections.size(); i++) {
-    std::cout << "#" << i + 1 << ": " << std::fixed
-              << std::setprecision(7) << intersections[i]
-              << std::endl;
-  }
-  std::cout << "========================================"
-            << std::endl;
-}
-
-void drawWithNormScale(std::vector<double> &line) {
-  const int maxScaleOnYAxis = 10;
-  std::vector<double>::iterator it;
-  for (it = line.begin(); it != line.end(); ++it) {
-    if (abs(*it) > maxScaleOnYAxis) {
-      line.erase(it);
-      line.insert(it, std::numeric_limits<double>::quiet_NaN());
-    }
-  }
-}
 
 int main(int argc, char **argv) {
   // argv[1] = a - width of hole
@@ -92,13 +50,13 @@ int main(int argc, char **argv) {
   const double epsilon = 0.0001;
 
   std::vector<double> intersectionsRightTg =
-      findSolutions(amountOfNumbers, epsilon, E, tg, rightPart);
+      countEquation(amountOfNumbers, epsilon, E, tg, rightPart);
 
   std::cout << "Intersections for symmetric function: " << std::endl;
   printOutput(intersectionsRightTg);
 
   std::vector<double> intersectionsRightCtg =
-      findSolutions(amountOfNumbers, epsilon, E, ctg, rightPart);
+      countEquation(amountOfNumbers, epsilon, E, ctg, rightPart);
 
   std::cout << "Intersections for assymmetric function: "
             << std::endl;

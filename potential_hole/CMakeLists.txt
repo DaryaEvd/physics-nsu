@@ -38,7 +38,10 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARN_FLAGS} ${ASAN_OPTIONS}")
 
 # add executable
 add_executable(solutions 
-  src/evdokimova_solutions.cpp)
+  src/evdokimova_solutions.cpp
+  src/drawingFigures.cpp
+  src/calculations.cpp
+  src/consoleOutput.cpp)
 
 # link python and numpy
 target_link_libraries(
@@ -50,7 +53,10 @@ target_link_libraries(
 )
 
 add_executable(levels 
-  src/evdokimova_levels.cpp)
+  src/evdokimova_levels.cpp
+  src/drawingFigures.cpp
+  src/calculations.cpp
+  src/consoleOutput.cpp)
 
 # link python and numpy
 target_link_libraries(
@@ -61,9 +67,13 @@ target_link_libraries(
       Python3::NumPy
 )
 
-
 add_executable(waves 
-  src/evdokimova_waves.cpp)
+  src/evdokimova_waves.cpp
+  src/drawingFigures.cpp
+  src/calculations.cpp
+  src/consoleOutput.cpp
+  src/coefficient.cpp
+  src/drawingWaves.cpp)
 
 # link python and numpy
 target_link_libraries(
@@ -73,3 +83,4 @@ target_link_libraries(
       ${PYTHON_LIBRARIES}
       Python3::NumPy
 )
+
