@@ -86,12 +86,12 @@ void drawIntensity() {
     xSinArray.push_back(std::sin(xCoord));
   }
 
-  // plt::title("Intensity"); //with title будет мемлик((
-
   plt::plot(xSinArray, redLight, "red");
   plt::plot(xSinArray, purpleLight, "purple");
-  plt::show();
 
+  plt::title("Intensity");
+
+  plt::show();
   plt::close();
 }
 

@@ -1,6 +1,6 @@
 # physics
 
-## Tasks to code 
+## [Tasks to code](https://github.com/DaryaEvd/physics/blob/main/stuff/tasks.pdf)  
 
 ### To compile and run from console:  
 Go to `src` folder in any project and write from there:  
@@ -45,8 +45,16 @@ or
 ![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymmetric_levels.png)  
 
 ##### Waves:
-![symmetric]()  
-![assymetric]()
+![symmetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Symetric_waves.png) 
+ 
+![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymetric_waves.png)  
+
+### Some recommendations about using matplotlibcpp  
+1. There **always** should be at least one `plt::plot(...)` method in `main`.  
+2. Use `plt::title()` only **after** `plt::plot(...)`.  
+Otherwise `seg fault` is guaranted ((  
+
+
 
 
 
