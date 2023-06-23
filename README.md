@@ -17,9 +17,12 @@ Result:
   
 Task: [potential hole](https://github.com/DaryaEvd/physics/tree/main/potential_hole).  
 To compile and run:  
-g++ evdokimova_potential_hole.cpp -o hole -I /usr/include/python3.8/ -I include/ -lpython3.8  
-./hole [width of hole]  
-or use cmake:
+g++ evdokimova_solutions.cpp -o solutions -I /usr/include/python3.8/ -I include/ -lpython3.8  
+./solutions [width of hole]  
+g++ evdokimova_levels.cpp -o levels -I /usr/include/python3.8/ -I include/ -lpython3.8   
+./solutions [width of hole]   
+   
+or use cmake:  
 cmake ..  
 make  
 ./solutions [width of hole]  
