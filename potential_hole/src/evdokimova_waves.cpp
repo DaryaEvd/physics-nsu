@@ -46,7 +46,8 @@ int main(int argc, char **argv) {
   std::vector<double> intersectionsRightCtg =
       countEquation(amountOfNumbers, epsilon, E, ctg, rightPart);
 
-  plt::plot({0}); //DON'T DELETE THIS LINE! OTHERWISE YOU GOT SEG FAULT
+  plt::plot(
+      {0}); // DON'T DELETE THIS LINE! OTHERWISE YOU GOT SEG FAULT
 
   createHole(U_0, a, amountOfNumbers);
 
@@ -61,19 +62,19 @@ int main(int argc, char **argv) {
   // */
 
   // uncomment a section below to see Assymmetric function's levels
-  // /*
-  // std::vector<double> levelsCotan =
-  //     generatePoints(0, a, amountOfNumbers);
-  // drawLevels(levelsCotan, intersectionsRightCtg);
+  /*
+  std::vector<double> levelsCotan =
+      generatePoints(0, a, amountOfNumbers);
+  drawLevels(levelsCotan, intersectionsRightCtg);
 
-  // for (double solution : intersectionsRightCtg) {
-  //   std::vector<double> numbers(levelsCotan.size(), solution);
-  //   plt::plot(levelsCotan, numbers, "gray");
-  // }
+  for (double solution : intersectionsRightCtg) {
+    std::vector<double> numbers(levelsCotan.size(), solution);
+    plt::plot(levelsCotan, numbers, "gray");
+  }
 
-  // drawAssymmetricWaveFunction(intersectionsRightCtg, h, m, U_0, a);
-  // plt::title("Assymmetric wave functions");
-  // */
+  drawAssymmetricWaveFunction(intersectionsRightCtg, h, m, U_0, a);
+  plt::title("Assymmetric wave functions");
+  */
 
   plt::show();
   plt::close();
