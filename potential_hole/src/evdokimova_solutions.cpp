@@ -59,10 +59,12 @@ int main(int argc, char **argv) {
   plt::plot(E, rightPart);
   plt::plot(E, tg);
   plt::plot(E, ctg);
-
+  
   plt::plot(E, xAxis);
-  plt::show();
 
+  plt::title("Solutions");
+
+  plt::show();
   plt::close();
 
   return 0;
