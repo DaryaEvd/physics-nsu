@@ -1,5 +1,5 @@
 #pragma once
 
-int isOkInputNumber(char *charString);
+int isOkWidthInput(char *charString);
 
-int isOkInputWidth(char *symbol);
+int isOkTypeWave(char *symbol);

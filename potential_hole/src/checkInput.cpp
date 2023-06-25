@@ -1,7 +1,7 @@
 #include "checkInput.hpp"
 #include <ctype.h>
 
-int isOkInputNumber(char *charString) {
+int isOkWidthInput(char *charString) {
   for (int i = 0; charString[i] != '\0'; i++) {
     bool isNumber = isdigit(charString[i]);
     if (!isNumber) {
@@ -11,7 +11,7 @@ int isOkInputNumber(char *charString) {
   return 1;
 }
 
-int isOkInputWidth(char *symbol) {
+int isOkTypeWave(char *symbol) {
   int length = 0;
   for (int i = 0; symbol[i] != '\0'; i++) {
     length++;

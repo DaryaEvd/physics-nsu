@@ -41,6 +41,7 @@ add_executable(solutions
   src/evdokimova_solutions.cpp
   src/drawingFigures.cpp
   src/calculations.cpp
+  src/checkInput.cpp
   src/consoleOutput.cpp)
 
 # link python and numpy

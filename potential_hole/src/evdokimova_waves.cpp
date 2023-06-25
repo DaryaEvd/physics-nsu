@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
     return 0;
   }
 
-  if (!isOkInputNumber(argv[1])) {
+  if (!isOkWidthInput(argv[1])) {
     std::cout << "Error! Width should be a number!" << std::endl;
     return 0;
   }
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     return 0;
   }
 
-  if (!isOkInputWidth(argv[2])) {
+  if (!isOkTypeWave(argv[2])) {
     std::cout << "Error! Type of wave is 's' or 'a'" << std::endl;
     return 0;
   }

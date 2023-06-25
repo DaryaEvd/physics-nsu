@@ -1,6 +1,7 @@
 #include "matplotlibcpp.h"
 
 #include "calculations.hpp"
+#include "checkInput.hpp"
 #include "consoleOutput.hpp"
 #include "drawingFigures.hpp"
 
@@ -14,10 +15,16 @@ int main(int argc, char **argv) {
     return 0;
   }
 
-  if (std::atoi(argv[1]) < 0) {
-    std::cout << "Error! Width should be > 0" << std::endl;
+  if (!isOkWidthInput(argv[1])) {
+    std::cout << "Error! Width should be a number!" << std::endl;
+    return 0;
   }
 
+  if (std::atoi(argv[1]) < 0) {
+    std::cout << "Error! Width should be > 0" << std::endl;
+    return 0;
+  }
+  
   const int a = std::atoi(argv[1]); // ширина ямы
 
   const int m = 1;
