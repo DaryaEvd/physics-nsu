@@ -1,6 +1,7 @@
 #include "matplotlibcpp.h"
 
 #include "calculations.hpp"
+#include "checkInput.hpp"
 #include "coefficients.hpp"
 #include "drawingFigures.hpp"
 #include "drawingLevels.hpp"
@@ -9,17 +10,30 @@ namespace plt = matplotlibcpp;
 
 int main(int argc, char **argv) {
   // argv[1] = a - width of hole
-  if (argc != 2) {
-    std::cout << "Width of hole is needed as argument to main"
+  // argv[2] - type of wave (symmetric or assymmetric)
+  if (argc != 3) {
+    std::cout << "Input: [width of hole] [type of wave: 's' or 'a']"
               << std::endl;
+    return 0;
+  }
+
+  if (!isOkInputNumber(argv[1])) {
+    std::cout << "Error! Width should be a number!" << std::endl;
     return 0;
   }
 
   if (std::atoi(argv[1]) < 0) {
     std::cout << "Error! Width should be > 0" << std::endl;
+    return 0;
   }
 
-  const int a = std::atoi(argv[1]); // ширина ямы
+  if (!isOkInputWidth(argv[2])) {
+    std::cout << "Error! Type of wave is 's' or 'a'" << std::endl;
+    return 0;
+  }
+
+  const int a = std::atoi(argv[1]);            // ширина ямы
+  const unsigned char typeOfWave = argv[2][0]; // тип волны
 
   const int m = 1;
   const int h = 1;
@@ -49,21 +63,19 @@ int main(int argc, char **argv) {
 
   createHole(U_0, a, amountOfNumbers);
 
-  // uncomment a section to see Symmetric function's levels
-  // /*
-  std::vector<double> levelsTan =
-      generatePoints(0, a, amountOfNumbers);
+  if (typeOfWave == 's') {
+    std::vector<double> levelsTan =
+        generatePoints(0, a, amountOfNumbers);
     drawLevels(levelsTan, intersectionsRightTg);
-  plt::title("Symmetric function's levels");
-  // */
+    plt::title("Symmetric function's levels");
+  }
 
-  // uncomment a section below to see Assymmetric function's levels
-  /*
-  std::vector<double> levelsCotan =
-      generatePoints(0, a, amountOfNumbers);
-  drawLevels(levelsCotan, intersectionsRightCtg);
-  plt::title("Assymetric function'l levels");
-  */
+  else if (typeOfWave == 'a') {
+    std::vector<double> levelsCotan =
+        generatePoints(0, a, amountOfNumbers);
+    drawLevels(levelsCotan, intersectionsRightCtg);
+    plt::title("Assymetric function'l levels");
+  }
 
   plt::show();
   plt::close();

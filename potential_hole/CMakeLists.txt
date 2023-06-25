@@ -56,6 +56,7 @@ add_executable(levels
   src/evdokimova_levels.cpp
   src/drawingFigures.cpp
   src/calculations.cpp
+  src/checkInput.cpp
   src/consoleOutput.cpp
   src/coefficient.cpp
   src/drawingLevels.cpp
@@ -75,6 +76,7 @@ add_executable(waves
   src/drawingFigures.cpp
   src/calculations.cpp
   src/consoleOutput.cpp
+  src/checkInput.cpp
   src/coefficient.cpp
   src/drawingWaves.cpp  
   src/drawingLevels.cpp)
