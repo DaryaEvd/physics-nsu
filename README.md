@@ -15,7 +15,7 @@ Go to `build` folder and write from there:
 ``` 
 cmake ..  
 make  
-./[evdokimova_project_name]  
+./[diffraction_grid]  
 ```  
 
 #### Result:  
@@ -53,6 +53,19 @@ or
 ###### For width 20
 ![symmetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Symetric_waves_20.png) 
 ![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymetric_waves_20.png)  
+
+## Task [TIME DEPENDENT SCHRODINGER EQUATION](https://github.com/DaryaEvd/physics/tree/main/wave_time)  
+
+### To compile and run use Cmake:  
+Go to `build` folder and write from there: 
+```
+cmake ..  
+make  
+./equation [time]  
+```  
+Result:  
+![tdse](https://github.com/DaryaEvd/physics/blob/main/wave_time/pictures/TDSE_1.png)  
+
 
 ### Some recommendations about using matplotlibcpp  
 1. There **always** should be at least one `plt::plot(...)` method in `main`.  
