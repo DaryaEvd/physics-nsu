@@ -30,9 +30,9 @@ cmake ..
 make
 ./[solutions] [width of hole]  
 or
-./[levels] [width of hole]  
+./[levels] [width of hole] [type of wave: 's' or 'a']  
 or  
-./[waves] [width of hole]    
+./[waves] [width of hole] [type of wave: 's' or 'a']  
 ```  
 
 #### Result:  
