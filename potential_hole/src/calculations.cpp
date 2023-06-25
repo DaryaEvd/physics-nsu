@@ -41,7 +41,7 @@ double symmetricFunctionEquations(double x, double C, double B, double k1,
 double assymmetricFunctionEquations(double x, double C, double B, double k1,
                     double k2, double solution, double a) {
   if (x < 0) {
-    return C * exp(k1 * x) + solution;
+    return -C * exp(k1 * x) + solution;
   } else if (x <= a) {
     return B * sin(k2 * x) + solution;
   } else {

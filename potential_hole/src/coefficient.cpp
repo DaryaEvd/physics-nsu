@@ -4,7 +4,7 @@
 
 double countSymmetricB(double k1, double k2, const int a) {
   return sqrt((k1 / ((cos(k2 * a / 2) * cos(k2 * a / 2)) +
-                     k1 * (sin(k2 * a) + 1 / (2 * k2) + a / 2))));
+                     k1 * (cos(k2 * a) + 1 / (2 * k2) + a / 2))));
 }
 
 double countAssymmetricB(double k1, double k2, const int a) {
