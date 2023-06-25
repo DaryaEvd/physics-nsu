@@ -4,6 +4,18 @@
 std::vector<double> generatePoints(double start, double end,
                                    int amountOfNumbers);
 
+double countArgInCommonTan(double x, double a, double m, double U_0,
+                           double h);
+double countTanFunc(double x, double a, double m, double U_0,
+                    double h);
+double countCotanFunc(double x, double a, double m, double U_0,
+                      double h);
+double countRightFunc(double x, double U_0);
+double countDiffRightTan(double x, double a, double m, double U_0,
+                         double h);
+double countDiffRightCotan(double x, double a, double m, double U_0,
+                           double h);
+
 std::vector<double> countEquation(const int amountOfNumbers,
                                   const double epsilon,
                                   std::vector<double> points,

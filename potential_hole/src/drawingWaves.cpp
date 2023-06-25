@@ -5,7 +5,7 @@
 #include "calculations.hpp"
 #include "coefficients.hpp"
 
-#include <cmath> 
+#include <cmath>
 namespace plt = matplotlibcpp;
 
 void drawSymmetricWaveFunction(std::vector<double> intersections,
@@ -50,5 +50,4 @@ void drawAssymmetricWaveFunction(std::vector<double> intersections,
 
     plt::plot(x, waveFuncArray);
   }
-
 }
