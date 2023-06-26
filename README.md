@@ -46,7 +46,7 @@ or
 
 ##### Waves:
 ###### For width 10
-![symmetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Symetric_waves_10.png) 
+![symmetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Symmetric_waves_10.png) 
  
 ![assymetric](https://github.com/DaryaEvd/physics/blob/main/potential_hole/pictures/Assymetric_waves_10.png)  
 
