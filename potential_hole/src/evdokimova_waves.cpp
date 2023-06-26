@@ -49,37 +49,63 @@ int main(int argc, char **argv) {
 
   std::vector<double> xAxis(amountOfNumbers, 0);
 
-  countParts(amountOfNumbers, rightPart, tg, ctg, E, h, m, U_0, a);
-
   const double epsilon = 0.0001;
 
-  std::vector<double> intersectionsRightTg =
-      countEquation(amountOfNumbers, epsilon, E, tg, rightPart);
+  // std::vector<double> intersectionsRightTg =
+  //     countEquation(amountOfNumbers, epsilon, E, tg, rightPart);
 
-  std::vector<double> intersectionsRightCtg =
-      countEquation(amountOfNumbers, epsilon, E, ctg, rightPart);
+  // std::vector<double> intersectionsRightCtg =
+  //     countEquation(amountOfNumbers, epsilon, E, ctg, rightPart);
 
   plt::plot(
       {0}); // DON'T DELETE THIS LINE! OTHERWISE YOU GOT SEG FAULT
 
   createHole(U_0, a, amountOfNumbers);
 
+  int maxBound = 0;
+  while (generateFunction(maxBound, a, m, U_0, h) < 0) {
+    maxBound++;
+  }
+  std::vector<double> result;
+
   if (typeOfWave == 's') {
-    std::vector<double> levelsTan =
-        generatePoints(0, a, amountOfNumbers);
-    drawLevels(levelsTan, intersectionsRightTg);
-    drawSymmetricWaveFunction(intersectionsRightTg, h, m, U_0, a);
+    for (int e = -1; e < maxBound - 1; e++) {
+      double leftSide = generateFunction(e, a, m, U_0, h);
+      double rightSise = generateFunction(e + 1, a, m, U_0, h);
+      if (rightSise > 0) {
+        rightSise = 0;
+      }
+      std::vector<double> temp =
+          countIntersections(leftSide + epsilon, rightSise - epsilon,
+                             a, m, U_0, h, countDiffRightTan);
+      result.insert(result.end(), temp.begin(), temp.end());
+    }
+
+    printOutput(result);
+
+    drawSymmetricWaveFunction(result, h, m, U_0, a);
     plt::title("Symmetric wave functions");
   }
 
   else if (typeOfWave == 'a') {
-    std::vector<double> levelsCotan =
-        generatePoints(0, a, amountOfNumbers);
-    drawLevels(levelsCotan, intersectionsRightCtg);
+    for (int e = -1; e < maxBound - 1; e++) {
+      double leftSide = generateFunction(e, a, m, U_0, h);
+      double rightSise = generateFunction(e + 1, a, m, U_0, h);
+      if (rightSise > 0) {
+        rightSise = 0;
+      }
+      std::vector<double> temp =
+          countIntersections(leftSide + epsilon, rightSise - epsilon,
+                             a, m, U_0, h, countDiffRightCotan);
+      result.insert(result.end(), temp.begin(), temp.end());
+    }
 
-    drawAssymmetricWaveFunction(intersectionsRightCtg, h, m, U_0, a);
+    drawAssymmetricWaveFunction(result, h, m, U_0, a);
     plt::title("Assymmetric wave functions");
   }
+
+  std::vector<double> levels = generatePoints(0, a, amountOfNumbers);
+  drawLevels(levels, result);
 
   plt::show();
   plt::close();

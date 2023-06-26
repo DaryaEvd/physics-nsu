@@ -30,6 +30,14 @@ double assymmetricFunctionEquations(double x, double C, double B,
                                     double k1, double k2,
                                     double solution, double a);
 
+std::vector<double> countIntersections(
+    double leftSide, double rightSise, double a, double m, double U_0,
+    double h,
+    double (*countDiffFunc)(double, double, double, double, double));
+
+double generateFunction(int level, double a, double m, double U_0,
+                        double h);
+                        
 void countParts(const int amountOfNumbers,
                 std::vector<double> &rightPart,
                 std::vector<double> &tg, std::vector<double> &ctg,

@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     std::cout << "Error! Width should be > 0" << std::endl;
     return 0;
   }
-  
+
   const int a = std::atoi(argv[1]); // ширина ямы
 
   const int m = 1;
@@ -44,17 +44,45 @@ int main(int argc, char **argv) {
 
   const double epsilon = 0.0001;
 
-  std::vector<double> intersectionsRightTg =
-      countEquation(amountOfNumbers, epsilon, E, tg, rightPart);
+  std::vector<double> intersectionsRightTg;
+  int maxBoundSymm = 0;
+  while (generateFunction(maxBoundSymm, a, m, U_0, h) < 0) {
+    maxBoundSymm++;
+  }
 
+  for (int e = -1; e < maxBoundSymm - 1; e++) {
+    double leftSide = generateFunction(e, a, m, U_0, h);
+    double rightSise = generateFunction(e + 1, a, m, U_0, h);
+    if (rightSise > 0) {
+      rightSise = 0;
+    }
+    std::vector<double> temp =
+        countIntersections(leftSide + epsilon, rightSise - epsilon, a,
+                           m, U_0, h, countDiffRightTan);
+    intersectionsRightTg.insert(intersectionsRightTg.end(),
+                                temp.begin(), temp.end());
+  }
   std::cout << "Intersections for symmetric function: " << std::endl;
   printOutput(intersectionsRightTg);
 
-  std::vector<double> intersectionsRightCtg =
-      countEquation(amountOfNumbers, epsilon, E, ctg, rightPart);
-
-  std::cout << "Intersections for assymmetric function: "
-            << std::endl;
+  int maxBoundAssym = 0;
+  while (generateFunction(maxBoundAssym, a, m, U_0, h) < 0) {
+    maxBoundAssym++;
+  }
+  std::vector<double> intersectionsRightCtg;
+  for (int e = -1; e < maxBoundAssym - 1; e++) {
+    double leftSide = generateFunction(e, a, m, U_0, h);
+    double rightSise = generateFunction(e + 1, a, m, U_0, h);
+    if (rightSise > 0) {
+      rightSise = 0;
+    }
+    std::vector<double> temp =
+        countIntersections(leftSide + epsilon, rightSise - epsilon, a,
+                           m, U_0, h, countDiffRightCotan);
+    intersectionsRightCtg.insert(intersectionsRightCtg.end(),
+                                 temp.begin(), temp.end());
+  }
+  std::cout << "Intersections for symmetric function: " << std::endl;
   printOutput(intersectionsRightCtg);
 
   std::cout << "===== intersections found ======" << std::endl;
@@ -66,7 +94,7 @@ int main(int argc, char **argv) {
   plt::plot(E, rightPart);
   plt::plot(E, tg);
   plt::plot(E, ctg);
-  
+
   plt::plot(E, xAxis);
 
   plt::title("Solutions");

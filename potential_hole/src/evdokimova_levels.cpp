@@ -6,61 +6,8 @@
 #include "consoleOutput.hpp"
 #include "drawingFigures.hpp"
 #include "drawingLevels.hpp"
-#include "drawingWaves.hpp" // DELETE !!!
 
 namespace plt = matplotlibcpp;
- 
-/*
-TODO: decompose as bin search + put functions as args to funcs
-*/
-
-std::vector<double> countSymmIntersections(double leftSide,
-                                           double rightSise, double a,
-                                           double m, double U_0,
-                                           double h) {
-  std::vector<double> resultIntersections;
-  double epsilon = 0.00000001;
-
-  while (rightSise - leftSide > epsilon) {
-    double mid = (leftSide + rightSise) / 2;
-    if (countDiffRightTan(mid, a, m, U_0, h) > 0) {
-      leftSide = mid;
-    } else {
-      rightSise = mid;
-    }
-  }
-
-  resultIntersections.push_back(leftSide);
-  return resultIntersections;
-}
-
-std::vector<double> countAssymmIntersections(double leftSide,
-                                             double rightSise,
-                                             double a, double m,
-                                             double U_0, double h) {
-  std::vector<double> resultIntersections;
-  double epsilon = 0.00000001;
-
-  while (rightSise - leftSide > epsilon) {
-    double mid = (leftSide + rightSise) / 2;
-    if (countDiffRightCotan(mid, a, m, U_0, h) > 0) {
-      leftSide = mid;
-    } else {
-      rightSise = mid;
-    }
-  }
-
-  resultIntersections.push_back(leftSide);
-  return resultIntersections;
-}
-
-double generateFunction(int level, double a, double m, double U_0,
-                        double h) {
-  double numerator = M_PI * h * (1 + 2 * level);
-  double numeratorInSquare = numerator * numerator;
-  double denominator = (2 * m * a * a);
-  return numeratorInSquare / denominator - U_0;
-}
 
 int main(int argc, char **argv) {
   // argv[1] = a - width of hole
@@ -104,63 +51,53 @@ int main(int argc, char **argv) {
 
   const double epsilon = 0.00000001;
 
-  std::vector<double> result;
-  int maxE = 0;
-  while (generateFunction(maxE, a, m, U_0, h) < 0) {
-    maxE++;
+  int maxBound = 0;
+  while (generateFunction(maxBound, a, m, U_0, h) < 0) {
+    maxBound++;
   }
 
   plt::plot(
       {0}); // DON'T DELETE THIS LINE! OTHERWISE YOU GOT SEG FAULT
 
   createHole(U_0, a, amountOfNumbers);
-  std::vector<double> levels = generatePoints(0, a, amountOfNumbers);
-  drawLevels(levels, result);
 
+  std::vector<double> result;
   if (typeOfWave == 's') {
-    //   std::vector<double> levelsTan =
-    //       generatePoints(0, a, amountOfNumbers);
-    //   drawLevels(levelsTan, intersectionsRightTg);
-
-    for (int e = -1; e < maxE - 1; e++) {
+    for (int e = -1; e < maxBound - 1; e++) {
       double leftSide = generateFunction(e, a, m, U_0, h);
       double rightSise = generateFunction(e + 1, a, m, U_0, h);
       if (rightSise > 0) {
         rightSise = 0;
       }
-      std::vector<double> temp = countSymmIntersections(
-          leftSide + epsilon, rightSise - epsilon, a, m, U_0, h);
+      std::vector<double> temp =
+          countIntersections(leftSide + epsilon, rightSise - epsilon,
+                             a, m, U_0, h, countDiffRightTan);
       result.insert(result.end(), temp.begin(), temp.end());
     }
 
     printOutput(result);
-
-    drawSymmetricWaveFunction(result, h, m, U_0, a);
-
     plt::title("Symmetric function's levels");
   }
 
   else if (typeOfWave == 'a') {
-    // std::vector<double> levelsCotan =
-    //     generatePoints(0, a, amountOfNumbers);
-    // drawLevels(levelsCotan, intersectionsRightCtg);
-    // plt::title("Assymetric function'l levels");
-
-    for (int e = -1; e < maxE - 1; e++) {
+    for (int e = -1; e < maxBound - 1; e++) {
       double leftSide = generateFunction(e, a, m, U_0, h);
       double rightSise = generateFunction(e + 1, a, m, U_0, h);
       if (rightSise > 0) {
         rightSise = 0;
       }
-      std::vector<double> temp = countAssymmIntersections(
-          leftSide + epsilon, rightSise - epsilon, a, m, U_0, h);
+      std::vector<double> temp =
+          countIntersections(leftSide + epsilon, rightSise - epsilon,
+                             a, m, U_0, h, countDiffRightCotan);
       result.insert(result.end(), temp.begin(), temp.end());
     }
 
     printOutput(result);
-
     plt::title("Assymmetric function's levels");
   }
+
+  std::vector<double> levels = generatePoints(0, a, amountOfNumbers);
+  drawLevels(levels, result);
 
   plt::show();
   plt::close();

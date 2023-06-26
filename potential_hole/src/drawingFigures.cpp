@@ -1,7 +1,7 @@
 #include "matplotlibcpp.h"
 
-#include "drawingFigures.hpp"
 #include "calculations.hpp"
+#include "drawingFigures.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -25,17 +25,17 @@ void createHole(const int U, const int a, const int amountOfNumbers) {
   std::vector<double> verticalWall =
       generatePoints(-U, 0, amountOfNumbers);
   std::vector<double> leftVertic(amountOfNumbers, 0);
-  std::vector<double> rightVertic(amountOfNumbers, 2 * a);
+  std::vector<double> rightVertic(amountOfNumbers, a);
 
   std::vector<double> cornerLeftX =
       generatePoints(0, -a, amountOfNumbers);
   std::vector<double> cornerLeftY(cornerLeftX.size(), 0);
 
-  std::vector<double> bottomX = generatePoints(0, 2 * a, amountOfNumbers);
+  std::vector<double> bottomX = generatePoints(0, a, amountOfNumbers);
   std::vector<double> bottomY(bottomX.size(), -U);
 
   std::vector<double> cornerRightX =
-      generatePoints(2 * a, 2 * a + a, amountOfNumbers);
+      generatePoints(a, 2 * a, amountOfNumbers);
   std::vector<double> cornerRightY(cornerRightX.size(), 0);
 
   plt::plot(cornerLeftX, cornerLeftY, "blue");

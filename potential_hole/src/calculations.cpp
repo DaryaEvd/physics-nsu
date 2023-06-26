@@ -44,19 +44,6 @@ double countDiffRightCotan(double x, double a, double m, double U_0,
   return countRightFunc(x, U_0) - countCotanFunc(x, a, m, U_0, h);
 }
 
-void countParts(const int amountOfNumbers,
-                std::vector<double> &rightPart,
-                std::vector<double> &tg, std::vector<double> &ctg,
-                std::vector<double> &E, const int h, const int m,
-                const int U_0, const int a) {
-  for (int i = 0; i < amountOfNumbers; i++) {
-    rightPart[i] = 1 / std::sqrt((U_0 / std::abs(E[i]) - 1));
-    tg[i] = std::tan((std::sqrt(2 * m * (E[i] + U_0)) * a / (2 * h)));
-    double tan = tg[i];
-    ctg[i] = 1 / tan;
-  }
-}
-
 std::vector<double> countEquation(const int amountOfNumbers,
                                   const double epsilon,
                                   std::vector<double> points,
@@ -67,11 +54,6 @@ std::vector<double> countEquation(const int amountOfNumbers,
   int m = 1;
   int h = 1;
   int a = 1;
-  // for (int i = 0; i < amountOfNumbers; i++) {
-  //   if (std::abs(right[i] - left[i]) < epsilon) {
-  //     intersections.push_back(points[i]);
-  //   }
-  // }
 
   for (int i = 0; i < amountOfNumbers - 1; i++) {
     double r = right.at(i);
@@ -103,7 +85,7 @@ double symmetricFunctionEquations(double x, double C, double B,
                                   double solution, double a) {
   if (x < 0) {
     return C * exp(k1 * x) + solution;
-  } else if (x <= 2 * a) {
+  } else if (x <= a) {
     return B * cos(k2 * x) + solution;
   } else {
     return C * exp(-k1 * x) + solution;
@@ -113,11 +95,51 @@ double symmetricFunctionEquations(double x, double C, double B,
 double assymmetricFunctionEquations(double x, double C, double B,
                                     double k1, double k2,
                                     double solution, double a) {
-  if (x <= 0) {
+  if (x < 0) {
     return -C * exp(k1 * x) + solution;
-  } else if (x < 2 * a) {
+  } else if (x <= a) {
     return B * sin(k2 * x) + solution;
   } else {
     return C * exp(-k1 * x) + solution;
+  }
+}
+
+std::vector<double> countIntersections(
+    double leftSide, double rightSise, double a, double m, double U_0,
+    double h,
+    double (*countDiffFunc)(double, double, double, double, double)) {
+  std::vector<double> resultIntersections;
+  double epsilon = 0.00000001;
+
+  while (rightSise - leftSide > epsilon) {
+    double mid = (leftSide + rightSise) / 2;
+    if (countDiffFunc(mid, a, m, U_0, h) > 0) {
+      leftSide = mid;
+    } else {
+      rightSise = mid;
+    }
+  }
+
+  resultIntersections.push_back(leftSide);
+  return resultIntersections;
+}
+
+double generateFunction(int level, double a, double m, double U_0,
+                        double h) {
+  double numerator = M_PI * h * (1 + 2 * level);
+  double numeratorInSquare = numerator * numerator;
+  double denominator = (2 * m * a * a);
+  return numeratorInSquare / denominator - U_0;
+}
+
+void countParts(const int amountOfNumbers,
+                std::vector<double> &rightPart,
+                std::vector<double> &tg, std::vector<double> &ctg,
+                std::vector<double> &E, const int h, const int m,
+                const int U_0, const int a) {
+  for (int i = 0; i < amountOfNumbers; i++) {
+    rightPart[i] = countRightFunc(E[i], U_0);
+    tg[i] = countTanFunc(E[i], a, m, U_0, h);
+    ctg[i] = countCotanFunc(E[i], a, m, U_0, h);
   }
 }
