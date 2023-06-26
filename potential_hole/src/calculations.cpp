@@ -44,41 +44,7 @@ double countDiffRightCotan(double x, double a, double m, double U_0,
   return countRightFunc(x, U_0) - countCotanFunc(x, a, m, U_0, h);
 }
 
-std::vector<double> countEquation(const int amountOfNumbers,
-                                  const double epsilon,
-                                  std::vector<double> points,
-                                  std::vector<double> left,
-                                  std::vector<double> right) {
-  std::vector<double> intersections;
-  int U_0 = 1;
-  int m = 1;
-  int h = 1;
-  int a = 1;
-
-  for (int i = 0; i < amountOfNumbers - 1; i++) {
-    double r = right.at(i);
-    double l = left.at(i);
-
-    while (std::abs(l - r) > epsilon) {
-      double mid = (l + r) / 2;
-      if ((1 / std::sqrt((U_0 / std::abs(mid - 1)))) *
-              std::tan((std::sqrt(2 * m * (l + U_0)) * a / (2 * h))) <
-          0) {
-        r = mid;
-      } else if ((1 / std::sqrt((U_0 / std::abs(mid - 1)))) *
-                     std::tan((std::sqrt(2 * m * (r + U_0)) * a /
-                               (2 * h))) <
-                 0) {
-        l = mid;
-      } else {
-        mid = 0;
-        break;
-      }
-    }
-  }
-
-  return intersections;
-}
+ 
 
 double symmetricFunctionEquations(double x, double C, double B,
                                   double k1, double k2,

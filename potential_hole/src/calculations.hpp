@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+
 std::vector<double> generatePoints(double start, double end,
                                    int amountOfNumbers);
 
@@ -15,12 +16,6 @@ double countDiffRightTan(double x, double a, double m, double U_0,
                          double h);
 double countDiffRightCotan(double x, double a, double m, double U_0,
                            double h);
-
-std::vector<double> countEquation(const int amountOfNumbers,
-                                  const double epsilon,
-                                  std::vector<double> points,
-                                  std::vector<double> left,
-                                  std::vector<double> right);
 
 double symmetricFunctionEquations(double x, double C, double B,
                                   double k1, double k2,
@@ -37,7 +32,7 @@ std::vector<double> countIntersections(
 
 double generateFunction(int level, double a, double m, double U_0,
                         double h);
-                        
+
 void countParts(const int amountOfNumbers,
                 std::vector<double> &rightPart,
                 std::vector<double> &tg, std::vector<double> &ctg,

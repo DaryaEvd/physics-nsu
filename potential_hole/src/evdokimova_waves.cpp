@@ -51,12 +51,6 @@ int main(int argc, char **argv) {
 
   const double epsilon = 0.0001;
 
-  // std::vector<double> intersectionsRightTg =
-  //     countEquation(amountOfNumbers, epsilon, E, tg, rightPart);
-
-  // std::vector<double> intersectionsRightCtg =
-  //     countEquation(amountOfNumbers, epsilon, E, ctg, rightPart);
-
   plt::plot(
       {0}); // DON'T DELETE THIS LINE! OTHERWISE YOU GOT SEG FAULT
 
