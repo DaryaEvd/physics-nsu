@@ -20,6 +20,7 @@ void drawSymmetricWaveFunction(std::vector<double> intersections,
     double C = countSymmetricC(k1, k2, a, B);
 
     std::vector<double> x = generatePoints(0, a, 10000);
+
     std::vector<double> waveFuncArray(x.size());
 
     for (size_t i = 0; i < x.size(); i++) {
@@ -42,6 +43,7 @@ void drawAssymmetricWaveFunction(std::vector<double> intersections,
     double C = countAssymmetricC(k1, k2, a, B);
 
     std::vector<double> x = generatePoints(0, a, 10000);
+
     std::vector<double> waveFuncArray(x.size());
 
     for (size_t i = 0; i < x.size(); i++) {

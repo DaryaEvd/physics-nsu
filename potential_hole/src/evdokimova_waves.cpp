@@ -77,7 +77,6 @@ int main(int argc, char **argv) {
     }
 
     drawSymmetricWaveFunction(result, h, m, U_0, a);
-    plt::title("Symmetric wave functions");
   }
 
   else if (typeOfWave == 'a') {
@@ -94,7 +93,6 @@ int main(int argc, char **argv) {
     }
 
     drawAssymmetricWaveFunction(result, h, m, U_0, a);
-    plt::title("Assymmetric wave functions");
   }
 
   std::vector<double> levels = generatePoints(0, a, amountOfNumbers);

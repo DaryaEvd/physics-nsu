@@ -16,7 +16,7 @@ double countTanFunc(double e, double a, double m, double U_0,
 
 double countCotanFunc(double e, double a, double m, double U_0,
                       double h) {
-  return 1 / countTanFunc(e, a, m, U_0, h);
+  return -1 / countTanFunc(e, a, m, U_0, h);
 }
 
 double countRightFunc(double e, double U_0) {
