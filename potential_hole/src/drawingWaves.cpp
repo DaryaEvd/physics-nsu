@@ -1,11 +1,12 @@
 #include "matplotlibcpp.h"
 
-#include "drawingWaves.hpp"
-
 #include "calculations.hpp"
 #include "coefficients.hpp"
+#include "drawingWaves.hpp"
+#include "generateValues.hpp"
 
 #include <cmath>
+
 namespace plt = matplotlibcpp;
 
 void drawSymmetricWaveFunction(std::vector<double> intersections,

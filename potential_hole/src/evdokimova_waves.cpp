@@ -7,6 +7,7 @@
 #include "drawingFigures.hpp"
 #include "drawingLevels.hpp"
 #include "drawingWaves.hpp"
+#include "generateValues.hpp"
 
 namespace plt = matplotlibcpp;
 
@@ -70,12 +71,10 @@ int main(int argc, char **argv) {
         rightSise = 0;
       }
       std::vector<double> temp =
-          countIntersections(leftSide + epsilon, rightSise - epsilon,
-                             a, m, U_0, h, countDiffRightTan);
+          solveEquation(leftSide + epsilon, rightSise - epsilon, a, m,
+                        U_0, h, countDiffRightTan);
       result.insert(result.end(), temp.begin(), temp.end());
     }
-
-    printOutput(result);
 
     drawSymmetricWaveFunction(result, h, m, U_0, a);
     plt::title("Symmetric wave functions");
@@ -89,8 +88,8 @@ int main(int argc, char **argv) {
         rightSise = 0;
       }
       std::vector<double> temp =
-          countIntersections(leftSide + epsilon, rightSise - epsilon,
-                             a, m, U_0, h, countDiffRightCotan);
+          solveEquation(leftSide + epsilon, rightSise - epsilon, a, m,
+                        U_0, h, countDiffRightCotan);
       result.insert(result.end(), temp.begin(), temp.end());
     }
 

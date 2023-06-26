@@ -2,9 +2,6 @@
 
 #include <vector>
 
-std::vector<double> generatePoints(double start, double end,
-                                   int amountOfNumbers);
-
 double countArgInCommonTan(double x, double a, double m, double U_0,
                            double h);
 double countTanFunc(double x, double a, double m, double U_0,
@@ -17,21 +14,10 @@ double countDiffRightTan(double x, double a, double m, double U_0,
 double countDiffRightCotan(double x, double a, double m, double U_0,
                            double h);
 
-double symmetricFunctionEquations(double x, double C, double B,
-                                  double k1, double k2,
-                                  double solution, double a);
-
-double assymmetricFunctionEquations(double x, double C, double B,
-                                    double k1, double k2,
-                                    double solution, double a);
-
-std::vector<double> countIntersections(
+std::vector<double> solveEquation(
     double leftSide, double rightSise, double a, double m, double U_0,
     double h,
     double (*countDiffFunc)(double, double, double, double, double));
-
-double generateFunction(int level, double a, double m, double U_0,
-                        double h);
 
 void countParts(const int amountOfNumbers,
                 std::vector<double> &rightPart,

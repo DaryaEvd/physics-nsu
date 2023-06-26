@@ -428,6 +428,36 @@ src/evdokimova_waves.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/waves.dir/build.make CMakeFiles/waves.dir/src/evdokimova_waves.cpp.s
 .PHONY : src/evdokimova_waves.cpp.s
 
+src/generateValues.o: src/generateValues.cpp.o
+.PHONY : src/generateValues.o
+
+# target to build an object file
+src/generateValues.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/solutions.dir/build.make CMakeFiles/solutions.dir/src/generateValues.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/levels.dir/build.make CMakeFiles/levels.dir/src/generateValues.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waves.dir/build.make CMakeFiles/waves.dir/src/generateValues.cpp.o
+.PHONY : src/generateValues.cpp.o
+
+src/generateValues.i: src/generateValues.cpp.i
+.PHONY : src/generateValues.i
+
+# target to preprocess a source file
+src/generateValues.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/solutions.dir/build.make CMakeFiles/solutions.dir/src/generateValues.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/levels.dir/build.make CMakeFiles/levels.dir/src/generateValues.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waves.dir/build.make CMakeFiles/waves.dir/src/generateValues.cpp.i
+.PHONY : src/generateValues.cpp.i
+
+src/generateValues.s: src/generateValues.cpp.s
+.PHONY : src/generateValues.s
+
+# target to generate assembly for a file
+src/generateValues.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/solutions.dir/build.make CMakeFiles/solutions.dir/src/generateValues.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/levels.dir/build.make CMakeFiles/levels.dir/src/generateValues.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waves.dir/build.make CMakeFiles/waves.dir/src/generateValues.cpp.s
+.PHONY : src/generateValues.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -469,6 +499,9 @@ help:
 	@echo "... src/evdokimova_waves.o"
 	@echo "... src/evdokimova_waves.i"
 	@echo "... src/evdokimova_waves.s"
+	@echo "... src/generateValues.o"
+	@echo "... src/generateValues.i"
+	@echo "... src/generateValues.s"
 .PHONY : help
 
 

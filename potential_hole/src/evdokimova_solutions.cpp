@@ -4,6 +4,7 @@
 #include "checkInput.hpp"
 #include "consoleOutput.hpp"
 #include "drawingFigures.hpp"
+#include "generateValues.hpp"
 
 namespace plt = matplotlibcpp;
 
@@ -25,7 +26,7 @@ int main(int argc, char **argv) {
     return 0;
   }
 
-  const int a = std::atoi(argv[1]); // ширина ямы
+  const int a = std::atoi(argv[1]); // width of the hole
 
   const int m = 1;
   const int h = 1;
@@ -49,7 +50,6 @@ int main(int argc, char **argv) {
   while (generateFunction(maxBoundSymm, a, m, U_0, h) < 0) {
     maxBoundSymm++;
   }
-
   for (int e = -1; e < maxBoundSymm - 1; e++) {
     double leftSide = generateFunction(e, a, m, U_0, h);
     double rightSise = generateFunction(e + 1, a, m, U_0, h);
@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
       rightSise = 0;
     }
     std::vector<double> temp =
-        countIntersections(leftSide + epsilon, rightSise - epsilon, a,
+        solveEquation(leftSide + epsilon, rightSise - epsilon, a,
                            m, U_0, h, countDiffRightTan);
     intersectionsRightTg.insert(intersectionsRightTg.end(),
                                 temp.begin(), temp.end());
@@ -77,12 +77,12 @@ int main(int argc, char **argv) {
       rightSise = 0;
     }
     std::vector<double> temp =
-        countIntersections(leftSide + epsilon, rightSise - epsilon, a,
+        solveEquation(leftSide + epsilon, rightSise - epsilon, a,
                            m, U_0, h, countDiffRightCotan);
     intersectionsRightCtg.insert(intersectionsRightCtg.end(),
                                  temp.begin(), temp.end());
   }
-  std::cout << "Intersections for symmetric function: " << std::endl;
+  std::cout << "Intersections for assymmetric function: " << std::endl;
   printOutput(intersectionsRightCtg);
 
   std::cout << "===== intersections found ======" << std::endl;

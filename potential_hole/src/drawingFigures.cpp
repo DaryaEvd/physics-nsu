@@ -2,6 +2,7 @@
 
 #include "calculations.hpp"
 #include "drawingFigures.hpp"
+#include "generateValues.hpp"
 
 #include <algorithm>
 #include <cmath>
